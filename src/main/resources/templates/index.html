@@ -1,0 +1,43 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <!-- Ably script -->
+    <script src="https://cdn.ably.io/lib/ably.min-1.js"></script>
+    <link rel="stylesheet" type="text/css" href="index.css" >
+</head>
+<body>
+<!--The chat app container-->
+<div class="chat-container">
+    <div class="topnav">
+        <div sec:authorize="!isAuthenticated()">
+            <a th:href="@{/oauth2/authorization/auth0}">Log In</a>
+        </div>
+        <div sec:authorize="isAuthenticated()">
+            <a th:href="@{/logout}">Log Out</a>
+        </div>
+    </div>
+    <div class="chat">
+        <!--Message container - the chat messages will appear here-->
+        <div class="data-container">
+            <div id="msg-container" class="message-container">
+                <h3>Chat</h3>
+                <ul class="row" id="channel-status"></ul>
+            </div>
+            <div class="presence-container">
+                <h3>Active users</h3>
+                <ul class="row" id="presence-members"></ul>
+            </div>
+        </div>
+
+        <!--Input container for the input field ans send button-->
+        <div class="input-container">
+            <div class="row text-input-container">
+                <input type="text" class="text-input" id="input-field"/>
+                <input id="publish" class="input-button" type="submit" value="Send">
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+<script src="chat.js"></script>
+</html>
