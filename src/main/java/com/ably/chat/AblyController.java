@@ -1,23 +1,15 @@
 package com.ably.chat;
 
-import com.auth0.jwt.JWT;
-import com.auth0.jwt.interfaces.DecodedJWT;
-import com.google.gson.*;
 import io.ably.lib.rest.AblyRest;
 import io.ably.lib.rest.Auth;
 import io.ably.lib.types.AblyException;
 import io.ably.lib.types.Capability;
-import net.minidev.json.JSONArray;
-import org.apache.tomcat.util.json.JSONParser;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.security.authentication.TestingAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.oauth2.client.authentication.OAuth2AuthenticationToken;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
 import javax.servlet.http.HttpServletResponse;
 import java.util.HashMap;
 import java.util.Map;
@@ -27,8 +19,7 @@ public class AblyController
 {
     private AblyRest ablyRest;
 
-    @Value( "${ABLY_API_KEY}" )
-    private void setAblyRest(String apiKey) throws AblyException {
+    public AblyController(@Value("${ablyApiKey}") String apiKey) throws AblyException {
         ablyRest = new AblyRest(apiKey);
     }
 
